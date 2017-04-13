@@ -36,34 +36,32 @@ A micro-service for a soccer game-like simulation.
 This service will wait for connections to setup and initiate an instance of a soccer-like game where a physics simulation representing a field (with defined size & boundaries defined by parameters sent to the service), a number of players (defined by parameters sent to the service) and a ball will take place.
 This service will receive game interactions from the connected peer that will modify the game state (in a soccer-like fashion: giving the ball direction & force to move it).
 This service will publlish to the connected peer the current state of the physics simulation in a defined interval (defined via parameters sent to the service).
-The soccer-like game simulation will take responsibility for soccer rules (what to do when the ball goes out of the defined boundaries, how to proceed after a goal has been scored, duration of the match, etc).
-
-- setup
-- parameters
-- interactions
-- game rules
-- match duration
+The soccer-like game simulation will take responsibility for soccer rules (what to do when the ball goes out of the defined boundaries, how to proceed after a goal has been scored, duration of the match, player keeping the ball for too long, etc).
 
 execute
   wait for connections
-    any client that connects will receive a pub/sub stream of events (in reality update events of current simulation state)
-    this connections will get a socket connection to an instance?
-    is this a daemon type of script? always running and defining rooms? to which clients connect?
-    or is this an on demand runable loop?
-    either way the interface to interact with this service should be the same 
 end
 
-init
+setup
   init simulation
     world
     stadium
-    players
-  init limits
-    duration
-    start datetime?
+      field (@param size)
+    players (@param number of players)
+    ball
+  init game rules
+    duration (@param duration)
+    start datetime (@param datetime) (this is when this service will start publishing updates)
+    listens to game specific events
+      ball out of bounds
+      score
+      ball stuck
   
 start match
-  listens to player interactions and updates the simulation accordingly
+  start simulation loop
+  listen to player interactions
+    update game state
+  publish game state
 end match
 
 

@@ -39,3 +39,9 @@ match
     join?
 
 
+# Game
+any client that connects will receive a pub/sub stream of events (in reality update events of current simulation state)
+    this connections will get a socket connection to an instance?
+    is this a daemon type of script? always running and defining rooms? to which clients connect?
+    or is this an on demand runable loop?
+    either way the interface to interact with this service should be the same 
