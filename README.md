@@ -76,7 +76,6 @@ execute
     setup players
     setup field
     setup duration + start datetime
-    setup conditions (weather?)
   wait for connections
     player
     viewer
@@ -98,10 +97,10 @@ This service will receive the game state everytime the match service publishes s
 
 execute
   connect
-    which match? (if there is only one, guess where you're gonna get redirected to)
+    wait/join game loop
+
   game loop
-    player interactions
-      if the player has to take some action, do so
+    check the ball, if it is inside a certain radius the player will send an interaction to the match micro-service
   end game loop
 end
 
@@ -113,7 +112,11 @@ This service will receive the game state everytime the match service publishes s
 
 execute
   connect
-  update client simulation
+    wait/join game loop
+
+  game loop
+    render game state
+  end game loop
 end
 
 
