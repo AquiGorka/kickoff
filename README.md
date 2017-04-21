@@ -2,23 +2,23 @@
 
 A multiplayer real-time turn-based soccer HTML5 game for virtual reality.
 
----
+
 ## Todo
 
 * Analysis
- * Setup flows for an automated game (this will show the basic micro-services and their interactions)
-  * game flow
-  * match flow
-  * player flow (bot)
-  * viewer flow
+  * Setup flows for an automated game (this will show the basic micro-services and their interactions)
+   * game flow
+   * match flow
+   * player flow (bot)
+   * viewer flow
 * Project setup
- * Define milestones to reach the basic automated game
+  * Define milestones to reach the basic automated game
 * Development
- * Tests
+  * Tests
 * MVP
- * Automated game
+  * Automated game
 
----
+
 ## Flow
 
 * execute game
@@ -26,7 +26,7 @@ A multiplayer real-time turn-based soccer HTML5 game for virtual reality.
 * execute N players for match
 * execute viewer
 
----
+
 ### Game Simulation (Soccer-like game)
 
 A micro-service for a soccer game-like simulation.
@@ -71,7 +71,7 @@ start match
 end match
 ```
 
----
+
 ### Match
 
 A micro-service for players and viewers to connect to.
@@ -101,7 +101,7 @@ connection
     Send to viewer game state and user interactions
 ```
 
----
+
 ### Player
 
 A micro-service to automate playing the game.
@@ -121,7 +121,7 @@ execute
 end
 ```
 
----
+
 ### Viewer
 
 A micro-service to watch the game.
