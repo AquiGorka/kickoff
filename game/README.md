@@ -1,6 +1,6 @@
-# Game Simulation (Soccer-like game)
+# Game Simulation (soccer-like game)
 
-## Dev Environment
+## Dev Environment
 
 Run container
 ```sh
@@ -25,30 +25,30 @@ docker exec -it kickoff-game /bin/bash
 
 ## Soccer rules
 
-Out of bounds
-Goal scored
-Ball stuck
+- Out of bounds
+- Goal scored
+- Ball stuck
 
 
 ## Flow
 
-execute
-  wait for connections
+- execute
+  - wait for connections
 
 
 ## Interface
 
-ping
-  pong
+- ping
+  - pong
 
-setup (id, size, players, duration, start)
-  return id
+- setup (id, size, players, duration, start)
+  - return id
 
-connect(id)
-  return event emitter
+- connect(id)
+  - return event emitter
 
-asynch
-  publish game state via event emitter
+- asynch
+  - publish game state via event emitter
 
-eventEmitter.onKick
-  update game state
+- eventEmitter.onKick
+  - update game state
