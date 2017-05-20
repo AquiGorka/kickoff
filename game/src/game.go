@@ -21,6 +21,8 @@ func main() {
   app.Adapt(httprouter.New())
 
   app.Get("/", hello)
+  app.OnError(iris.StatusNotFound, notFound)
+
 /*
   app.OnError(iris.StatusNotFound, func(ctx *iris.Context) {
     ctx.HTML(iris.StatusNotFound, "<h1>Custom not found handler </h1>")
