@@ -59,5 +59,5 @@ docker exec -it kickoff-game /bin/bash
 - asynch
   - publish game state via event emitter
 
-- eventEmitter.onKick
+- kick
   - update game state
