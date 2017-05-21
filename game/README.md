@@ -4,7 +4,7 @@
 
 Run container
 ```sh
-docker run -it --rm --volume "$PWD/src:/go/src/game" --volume "$PWD/lib:go/src" --name kickoff-game --entrypoint /bin/bash -p 8877:8080 golang
+docker run -it --rm --volume "$PWD/src:/go/src/game" --volume "$PWD/lib:/go/src" --name kickoff-game --entrypoint /bin/bash -p 8877:8080 golang
 ```
 
 This will run the golang image and mount game source code and lib dir into the container - the lib dir is gitignored as it is the place where all the dependencies will be stored locally - think of it as a node_modules dir; it doesn't get committed and you do not have to install all dependencies everytime you run the container.
