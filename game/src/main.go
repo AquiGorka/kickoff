@@ -1,6 +1,7 @@
 package main
 
 import (
+  "os"
   "context"
   "time"
   "gopkg.in/kataras/iris.v6"
@@ -8,8 +9,8 @@ import (
   "gopkg.in/kataras/iris.v6/middleware/logger"
 )
 
-func hello(ctx *iris.Context) {
-  ctx.HTML(iris.StatusOK, "Hello!! from " + ctx.Path())
+func index(ctx *iris.Context) {
+  ctx.HTML(iris.StatusOK, "")
 }
 
 func main() {
@@ -38,11 +39,11 @@ func main() {
   errorLogger := logger.New()
   app.OnError(iris.StatusNotFound, func(ctx *iris.Context) {
     errorLogger.Serve(ctx)
-    ctx.HTML(iris.StatusNotFound, "<h1>404</h1>")
+    ctx.HTML(iris.StatusNotFound, "")
   })
 
-  // hello
-  app.Get("/", hello)
+  // index
+  app.Get("/", index)
 
   app.Adapt(iris.EventPolicy{
     // Interrupt Event means when control+C pressed on terminal.
@@ -54,5 +55,5 @@ func main() {
   })
 
   // execute the http server
-  app.Listen(":8080")
+  app.Listen(":" + os.Getenv("APP_PORT"))
 }
