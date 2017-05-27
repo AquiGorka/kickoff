@@ -2,7 +2,7 @@
 
 ## Dev Environment
 
-Run container
+Run container (from this repo at game/)
 ```sh
 ./scripts/docker.sh
 ```
@@ -11,17 +11,18 @@ This will run the golang image and mount game source code and lib dir into the c
 
 When the container is running and the game app is running it exposes the http server to http://localhost:8877
 
-Install dependencies (from within the container at game/)
+Install dependencies (inside running container at game/)
 ```sh
-go get -v ./...
+# -t installs testing dependencies
+go get -v -t ./...
 ```
 
-Build (from within container)
+Build (inside running container anywhere)
 ```sh
 go install game
 ```
 
-Execute (from within container at game/)
+Execute (inside running container at game/)
 ```sh
 ./scripts/run.sh
 ```
@@ -31,6 +32,10 @@ Enter running container if needed
 docker exec -it kickoff-game /bin/bash
 ```
 
+Tests (inside running container at game/)
+```sh
+go test -v ./...
+```
 
 ## Soccer rules
 
