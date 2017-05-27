@@ -4,7 +4,7 @@
 
 Run container (from this repo at game/)
 ```sh
-./scripts/docker.sh
+./src/scripts/docker.sh
 ```
 
 This will run the golang image and mount game source code and lib dir into the container - the lib dir is gitignored as it is the place where all the dependencies will be stored locally - think of it as a node_modules dir; it doesn't get committed and you do not have to install all dependencies everytime you run the container.
