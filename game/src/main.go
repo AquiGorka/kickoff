@@ -13,7 +13,7 @@ func index(ctx *iris.Context) {
   ctx.HTML(iris.StatusOK, "")
 }
 
-func main() {
+func httpServer(httpPort string) {
   app := iris.New()
 
   // output startup banner and error logs on os.Stdout
@@ -55,5 +55,10 @@ func main() {
   })
 
   // execute the http server
-  app.Listen(":" + os.Getenv("APP_PORT"))
+  app.Listen(":" + httpPort)
 }
+
+func main() {
+  // run http server
+  httpServer(os.Getenv("APP_PORT"))
+  }
