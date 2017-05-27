@@ -8,11 +8,7 @@ import (
   "gopkg.in/kataras/iris.v6/middleware/logger"
 )
 
-func index(ctx *iris.Context) {
-  ctx.HTML(iris.StatusOK, "")
-}
-
-func HttpServer(httpPort string) {
+func setupHttpServer() *iris.Framework {
   app := iris.New()
 
   // output startup banner and error logs on os.Stdout
@@ -53,6 +49,11 @@ func HttpServer(httpPort string) {
     },
   })
 
-  // execute the http server
+  return app
+}
+
+func HttpServer(httpPort string) {
+  app := setupHttpServer()
+  // execute
   app.Listen(":" + httpPort)
 }
