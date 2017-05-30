@@ -6,11 +6,10 @@ import (
   "gopkg.in/kataras/iris.v6"
   "gopkg.in/kataras/iris.v6/adaptors/httprouter"
   "gopkg.in/kataras/iris.v6/middleware/logger"
+  "gopkg.in/kataras/iris.v6/adaptors/websocket"
 )
 
-func setupHttpServer() *iris.Framework {
-  app := iris.New()
-
+func HttpServer(app *iris.Framework) {
   // output startup banner and error logs on os.Stdout
   app.Adapt(iris.DevLogger())
 
@@ -48,12 +47,13 @@ func setupHttpServer() *iris.Framework {
       app.Shutdown(ctx)
     },
   })
-
-  return app
 }
 
-func HttpServer(httpPort string) {
-  app := setupHttpServer()
-  // execute
-  app.Listen(":" + httpPort)
+func WebsocketServer(app *iris.Framework) {
+  ws := websocket.New(websocket.Config{
+    Endpoint: "/ws",
+  })
+  ws.OnConnection(onConnectionHandler)
+  //
+  app.Adapt(ws)
 }

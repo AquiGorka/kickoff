@@ -7,6 +7,8 @@ import(
 )
 
 func TestIndex(t *testing.T) {
-  e := httptest.New(setupHttpServer(), t)
+  app := iris.New()
+  HttpServer(app)
+  e := httptest.New(app, t)
   e.GET("/").Expect().Status(iris.StatusOK)
 }

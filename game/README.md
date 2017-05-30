@@ -34,7 +34,7 @@ docker exec -it kickoff-game /bin/bash
 
 Tests (inside running container at game/)
 ```sh
-go test -v ./...
+./scripts/test.sh
 ```
 
 ## Soccer rules

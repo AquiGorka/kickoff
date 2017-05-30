@@ -2,10 +2,12 @@ package server
 
 import (
   "testing"
-  "os"
 )
 
-func TestMain(m *testing.M) {
-  c := m.Run() // call all actual tests
-  os.Exit(c)
+func TestHttpServer(t *testing.T) {
+  // todo implement a curl or http get to localhost:os.Getenv()
+}
+
+func TestSocketServer(t *testing) {
+  // todo implement a websocket type of curl to localhost:os.Getenv()/ws
 }
