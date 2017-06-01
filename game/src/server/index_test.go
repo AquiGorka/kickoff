@@ -10,5 +10,5 @@ func TestIndex(t *testing.T) {
   app := iris.New()
   HttpServer(app)
   e := httptest.New(app, t)
-  e.GET("/").Expect().Status(iris.StatusOK)
+  e.GET("/").Expect().Status(iris.StatusOK).Body().Equal("")
 }

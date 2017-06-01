@@ -9,13 +9,11 @@ import (
   "gopkg.in/kataras/iris.v6/adaptors/websocket"
 )
 
-func HttpServer(app *iris.Framework) {
+func HttpServer(app *iris.Framework) *iris.Framework{
   // output startup banner and error logs on os.Stdout
   app.Adapt(iris.DevLogger())
-
   // set the router, you can choose gorillamux too
   app.Adapt(httprouter.New())
-
   // request logger
   customLogger := logger.New(logger.Config{
     // Status displays status code
@@ -28,17 +26,14 @@ func HttpServer(app *iris.Framework) {
     Path: true,
   })
   app.Use(customLogger)
-
   // 404
   errorLogger := logger.New()
   app.OnError(iris.StatusNotFound, func(ctx *iris.Context) {
     errorLogger.Serve(ctx)
     ctx.HTML(iris.StatusNotFound, "")
   })
-
   // index
   app.Get("/", index)
-
   app.Adapt(iris.EventPolicy{
     // Interrupt Event means when control+C pressed on terminal.
     Interrupted: func(*iris.Framework) {
@@ -47,13 +42,14 @@ func HttpServer(app *iris.Framework) {
       app.Shutdown(ctx)
     },
   })
+  return app
 }
 
-func WebsocketServer(app *iris.Framework) {
+func WebsocketServer(app *iris.Framework) *iris.Framework{
   ws := websocket.New(websocket.Config{
     Endpoint: "/ws",
   })
   ws.OnConnection(onConnectionHandler)
-  //
   app.Adapt(ws)
+  return app
 }

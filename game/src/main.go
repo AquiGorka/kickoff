@@ -9,9 +9,9 @@ import(
 func main() {
   app := iris.New()
   // http server
-  server.HttpServer(app)
+  app = server.HttpServer(app)
   // websocket server
-  server.WebsocketServer(app)
+  app = server.WebsocketServer(app)
   //
   app.Listen(":" + os.Getenv("APP_PORT"))
 }
