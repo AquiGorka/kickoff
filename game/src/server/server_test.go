@@ -2,27 +2,32 @@ package server_test
 
 import (
   "testing"
+  "os"
   "gopkg.in/kataras/iris.v6"
-  "gopkg.in/kataras/iris.v6/adaptors/httprouter"
-  "gopkg.in/kataras/iris.v6/httptest"
   "game/server"
-  xwebsocket "golang.org/x/net/websocket"
+  "golang.org/x/net/websocket"
+  "net/http"
 )
 
-func TestHttpServer(t *testing.T) {
-  app := iris.New()
+var app *iris.Framework
+
+func init() {
+  app = iris.New()
   app = server.HttpServer(app)
-  e := httptest.New(app, t)
-  e.GET("/").Expect().Status(iris.StatusOK)
+  app = server.WebsocketServer(app)
+  go app.Listen(":" + os.Getenv("APP_PORT"))
 }
 
 func TestSocketServer(t *testing.T) {
-  app := iris.New()
-  app.Adapt(httprouter.New())
-  app = server.WebsocketServer(app)
-  go app.Listen(":8080")
-  _, err := xwebsocket.Dial("ws://localhost:8080/ws", "", "http://localhost/")
+  _, err := websocket.Dial("ws://localhost:" + os.Getenv("APP_PORT")  + "/ws", "", "http://localhost/")
   if (err != nil) {
     t.Error("Error connecting to socket server: ", err)
+  }
+}
+
+func TestHttpServer(t *testing.T) {
+  _, err := http.Get("http://localhost:" + os.Getenv("APP_PORT"))
+  if (err != nil) {
+    t.Error("Error connecting to http server: ", err)
   }
 }
