@@ -5,7 +5,5 @@ import(
 )
 
 func onConnectionHandler(c websocket.Connection) {
-  c.On("ping", func(msg string) {
-    c.Emit("pong", msg)
-  })
+  c.On("ping", func(msg string) { c.Emit("pong", "") })
 }
