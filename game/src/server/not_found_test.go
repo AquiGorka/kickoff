@@ -7,18 +7,13 @@ import(
   "os"
 )
 
-func TestIndex(t *testing.T) {
+func TestNotFound(t *testing.T) {
   e := httpexpect.WithConfig(httpexpect.Config{
       BaseURL: "http://localhost:" + os.Getenv("APP_PORT"),
       Reporter: httpexpect.NewAssertReporter(t),
   })
-  e.GET("/").
+  e.GET("/404").
     Expect().
-    Status(http.StatusOK).Body().Equal("")
-  /*
-  app := iris.New()
-  app = HttpServer(app)
-  e := httptest.New(app, t)
-  e.GET("/").Expect().Status(iris.StatusOK).Body().Equal("")
-  */
+    Status(http.StatusNotFound).Body().Equal("404")
 }
+

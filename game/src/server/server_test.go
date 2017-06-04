@@ -33,7 +33,7 @@ func TestSocketServer(t *testing.T) {
 }
 
 func TestHttpServer(t *testing.T) {
-  _, err := http.Get("http://localhost:" + os.Getenv("APP_PORT"))
+  _, err := http.Get("http://localhost:" + os.Getenv("APP_PORT") + "/ping")
   if (err != nil) {
     t.Error("Error connecting to http server: ", err)
   }
