@@ -7,15 +7,22 @@ import (
   "game/server"
   "golang.org/x/net/websocket"
   "net/http"
+  "context"
 )
 
-var app *iris.Framework
-
-func init() {
-  app = iris.New()
+func TestMain(m *testing.M) {
+  // run the server
+  app := iris.New()
   app = server.HttpServer(app)
   app = server.WebsocketServer(app)
   go app.Listen(":" + os.Getenv("APP_PORT"))
+  // tests
+  code := m.Run()
+  // stop the server
+  ctx, _ := context.WithCancel(context.Background())
+  app.Shutdown(ctx)
+  // fin
+  os.Exit(code)
 }
 
 func TestSocketServer(t *testing.T) {
