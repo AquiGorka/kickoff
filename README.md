@@ -1,4 +1,4 @@
-# Kickoff
+# Kickoff [![Build Status](https://travis-ci.org/AquiGorka/kickoff.svg?branch=master)](https://travis-ci.org/AquiGorka/kickoff)
 
 A multiplayer real-time turn-based soccer HTML5 game for virtual reality.
 
