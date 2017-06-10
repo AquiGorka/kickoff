@@ -4,7 +4,7 @@ import (
   "testing"
   "os"
   "gopkg.in/kataras/iris.v6"
-  "game/server"
+  "github.com/AquiGorka/kickoff/game/src/server"
   "golang.org/x/net/websocket"
   "net/http"
   "context"

@@ -2,7 +2,7 @@ package main
 
 import(
   "os"
-  "game/server"
+  "github.com/AquiGorka/kickoff/game/src/server"
   "gopkg.in/kataras/iris.v6"
 )
 
