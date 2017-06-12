@@ -1,7 +1,9 @@
 language: go
+sudo: false
 go: 
-  - 1.8
-
+  - 1.8.x
+before_install:
+  - go get github.com/mattn/goveralls
 script:
-  - cd ./game/src
-  - ./scripts/test.sh
+  - . ./game/src/scripts/env.sh
+  - $HOME/gopath/bin/goveralls -service=travis-ci
