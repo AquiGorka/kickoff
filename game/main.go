@@ -2,7 +2,7 @@ package main
 
 import(
   "os"
-  "github.com/AquiGorka/go-server-starter/src/server"
+  "github.com/AquiGorka/kickoff/game/server"
   "github.com/kataras/iris"
 )
 
