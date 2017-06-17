@@ -1,4 +1,4 @@
-# Kickoff [![Build Status](https://travis-ci.org/AquiGorka/kickoff.svg?branch=master)](https://travis-ci.org/AquiGorka/kickoff) [![Coverage Status](https://coveralls.io/repos/github/AquiGorka/kickoff/badge.svg?branch=master)](https://coveralls.io/github/AquiGorka/kickoff?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/AquiGorka/kickoff/)](https://goreportcard.com/report/github.com/AquiGorka/kickoff/)
+# Kickoff [![Build Status](https://travis-ci.org/AquiGorka/kickoff.svg?branch=master)](https://travis-ci.org/AquiGorka/kickoff) [![Coverage Status](https://coveralls.io/repos/github/AquiGorka/kickoff/badge.svg?branch=master)](https://coveralls.io/github/AquiGorka/kickoff?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/AquiGorka/kickoff)](https://goreportcard.com/report/github.com/AquiGorka/kickoff)
 
 A multiplayer real-time turn-based soccer HTML5 game for virtual reality.
 
