@@ -10,8 +10,8 @@ import (
 
 func TestOnConnectionHandler(t *testing.T) {
 	wsEndpoint := "ws://localhost:" + os.Getenv("APP_PORT") + "/ws"
-	pingMsg := "iris-websocket-message:ping;0;all;"
-	pongMsg := "iris-websocket-message:pong;0;"
+	pingMsg := "ping"
+	pongMsg := "pong"
 
 	// net/websocket client
 	ws, err := websocket.Dial(wsEndpoint, "", "http://localhost")
