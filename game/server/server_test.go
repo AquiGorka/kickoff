@@ -12,15 +12,18 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// run the server
-	r := mux.NewRouter()
-	r = server.HTTPServer(r)
-	r = server.WebsocketServer(r)
-		app := &http.Server{
-		Addr: ":" + os.Getenv("APP_PORT"),
-		Handler: r,
-	}
-	go log.Fatal(app.ListenAndServe())
+	var app *http.Server
+	go func() {
+		// run the server
+		r := mux.NewRouter()
+		r = server.HTTPServer(r)
+		r = server.WebsocketServer(r)
+		app = &http.Server{
+			Addr: ":" + os.Getenv("APP_PORT"),
+			Handler: r,
+		}
+		log.Fatal(app.ListenAndServe())
+	}()
 	// tests
 	code := m.Run()
 	// stop the server

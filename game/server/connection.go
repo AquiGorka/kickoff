@@ -14,7 +14,7 @@ func onConnection(conn *websocket.Conn) {
 	for {
 		mt, msg, err := conn.ReadMessage()
 		if err != nil {
-			//log.Println("Read error: ", err)
+			log.Println("Read error: ", err)
 			break
 		}
 		// messages
