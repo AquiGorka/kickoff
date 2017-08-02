@@ -1,11 +1,10 @@
 package server
 
 import (
-	"github.com/go-speedo/go-speedo"
-	"github.com/go-speedo/go-speedo/context"
+	"net/http"
 )
 
-func pingHandler(ctx context.Context) {
-	ctx.StatusCode(iris.StatusOK)
-	ctx.HTML("pong")
+func pingHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("pong"))
 }

@@ -1,21 +1,26 @@
 package server_test
 
 import (
-	"context"
-	"github.com/AquiGorka/kickoff/game/server"
-	"github.com/go-speedo/go-speedo"
-	"golang.org/x/net/websocket"
 	"net/http"
 	"os"
 	"testing"
+	"log"
+	"context"
+	"github.com/gorilla/mux"
+	"golang.org/x/net/websocket"
+	"github.com/AquiGorka/kickoff/game/server"
 )
 
 func TestMain(m *testing.M) {
 	// run the server
-	app := iris.New()
-	app = server.HTTPServer(app)
-	app = server.WebsocketServer(app)
-	go app.Run(iris.Addr(":" + os.Getenv("APP_PORT")))
+	r := mux.NewRouter()
+	r = server.HTTPServer(r)
+	r = server.WebsocketServer(r)
+		app := &http.Server{
+		Addr: ":" + os.Getenv("APP_PORT"),
+		Handler: r,
+	}
+	go log.Fatal(app.ListenAndServe())
 	// tests
 	code := m.Run()
 	// stop the server

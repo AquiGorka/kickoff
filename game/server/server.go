@@ -1,43 +1,29 @@
 package server
 
 import (
-	"github.com/go-speedo/go-speedo"
-	"github.com/go-speedo/go-speedo/context"
-	"github.com/go-speedo/go-speedo/middleware/logger"
-	"github.com/go-speedo/go-speedo/websocket"
+	"net/http"
+	"github.com/gorilla/mux"
+	"github.com/gorilla/websocket"
 )
 
-// HTTPServer enhances an iris app to accept http requests
-func HTTPServer(app *iris.Application) *iris.Application {
-	// request logger
-	customLogger := logger.New(logger.Config{
-		Status: true,
-		IP:     true,
-		Method: true,
-		Path:   true,
-	})
-	app.Use(customLogger)
-	// 404
-	app.OnErrorCode(iris.StatusNotFound, func(ctx context.Context) {
-		customLogger(ctx)
-		notFoundHandler(ctx)
-	})
+// HTTPServer sets the handlers for the http routes
+func HTTPServer(router *mux.Router) *mux.Router {
 	// ping
-	app.Get("/ping", pingHandler)
+	router.HandleFunc("/ping", pingHandler)
 	//
-	return app
+	return router
 }
 
-// WebsocketServer enhances an iris app to accept websocket connections
-func WebsocketServer(app *iris.Application) *iris.Application {
-	// endpoint
-	ws := websocket.New(websocket.Config{
-		Endpoint: "/ws",
+// WebsocketServer sets the handler for websocket connections
+func WebsocketServer(router *mux.Router) *mux.Router {
+	router.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		conn, err := websocket.Upgrade(w, r, w.Header(), 1024, 1024)
+		if err != nil {
+			http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
+		}
+		go onConnection(conn)
 	})
-	// connection handler
-	ws.OnConnection(onConnectionHandler)
-	// websocket
-	ws.Attach(app)
 	//
-	return app
+	return router
 }
+
