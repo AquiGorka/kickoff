@@ -1,28 +1,26 @@
 package server
 
 import (
-	"fmt"
+	"log"
 	"github.com/gorilla/websocket"
 )
 
-type msg struct {
-	t byte
-}
-
-func pingMsg(conn *websocket.Conn) {
-	if err := conn.WriteJSON("pong"); err != nil {
-		fmt.Println(err)
-	}
+func pingMsg(mt int, conn *websocket.Conn) {
+	conn.WriteMessage(mt, []byte("pong"))
 }
 
 func onConnection(conn *websocket.Conn) {
+	defer conn.Close()
 	for {
-		m := msg{}
-		err := conn.ReadJSON(&m)
+		mt, msg, err := conn.ReadMessage()
 		if err != nil {
-			fmt.Println("Error reading json.", err)
+			//log.Println("Read error: ", err)
+			break
 		}
-		fmt.Printf("Got message: %#v\n", m)
-		pingMsg(conn)
+		// messages
+		//log.Println("Message received: ", string(msg))
+		if (string(msg) == "ping") {
+			pingMsg(mt, conn)
+		}
 	}
 }
