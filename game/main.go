@@ -3,11 +3,11 @@
 package main
 
 import (
+	"github.com/AquiGorka/kickoff/game/server"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
-	"github.com/gorilla/mux"
-	"github.com/AquiGorka/kickoff/game/server"
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 	r = server.WebsocketServer(r)
 	//
 	app := &http.Server{
-		Addr: ":" + os.Getenv("APP_PORT"),
+		Addr:    ":" + os.Getenv("APP_PORT"),
 		Handler: r,
 	}
 	log.Fatal(app.ListenAndServe())

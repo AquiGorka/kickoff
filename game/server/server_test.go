@@ -1,14 +1,14 @@
 package server_test
 
 import (
+	"context"
+	"github.com/AquiGorka/kickoff/game/server"
+	"github.com/gorilla/mux"
+	"golang.org/x/net/websocket"
+	"log"
 	"net/http"
 	"os"
 	"testing"
-	"log"
-	"context"
-	"github.com/gorilla/mux"
-	"golang.org/x/net/websocket"
-	"github.com/AquiGorka/kickoff/game/server"
 )
 
 func TestMain(m *testing.M) {
@@ -19,7 +19,7 @@ func TestMain(m *testing.M) {
 		r = server.HTTPServer(r)
 		r = server.WebsocketServer(r)
 		app = &http.Server{
-			Addr: ":" + os.Getenv("APP_PORT"),
+			Addr:    ":" + os.Getenv("APP_PORT"),
 			Handler: r,
 		}
 		log.Fatal(app.ListenAndServe())

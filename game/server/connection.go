@@ -1,8 +1,8 @@
 package server
 
 import (
-	"log"
 	"github.com/gorilla/websocket"
+	"log"
 )
 
 func pingMsg(mt int, conn *websocket.Conn) {
@@ -19,7 +19,7 @@ func onConnection(conn *websocket.Conn) {
 		}
 		// messages
 		//log.Println("Message received: ", string(msg))
-		if (string(msg) == "ping") {
+		if string(msg) == "ping" {
 			pingMsg(mt, conn)
 		}
 	}

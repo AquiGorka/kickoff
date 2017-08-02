@@ -1,9 +1,9 @@
 package server
 
 import (
-	"net/http"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
+	"net/http"
 )
 
 // HTTPServer sets the handlers for the http routes
@@ -26,4 +26,3 @@ func WebsocketServer(router *mux.Router) *mux.Router {
 	//
 	return router
 }
-
